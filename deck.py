@@ -6,6 +6,28 @@ class deck:
     deckCards = []
 
     def __init__(self):
+        self.fillDeck()
+
+    def printDeck(self):
+        for i in range(len(self.deckCards)):
+            print(self.deckCards[i].showCard())
+
+    def shuffle(self):
+        random.shuffle(self.deckCards)
+
+    def drawCardNoReplace(self):
+        self.shuffle()
+        return self.deckCards.pop()
+
+    def drawCardWithReplace(self):
+        self.shuffle()
+        return self.deckCards[0]
+
+    def clearDeck(self):
+        self.deckCards = []
+
+    def fillDeck(self):
+        self.clearDeck()
         for i in range (1,14):
             redHearts = playingCard('red','hearts',i)
             self.deckCards.append(redHearts)
@@ -16,15 +38,17 @@ class deck:
             blackClubs = playingCard('black','clubs',i)
             self.deckCards.append(blackClubs)
 
-    def printDeck(self):
-        for i in range(len(self.deckCards)):
-            print(self.deckCards[i].showCard())
-
-    def shuffle(self):
-        random.shuffle(self.deckCards)
-
-
 if __name__ == "__main__":
     test = deck()
-    test.shuffle()
+    #test.shuffle()
     test.printDeck()
+    print("first deck")
+    test.shuffle()
+    print("shuffle")
+    test.printDeck()
+    print("new deck")
+    test.fillDeck()
+    test.printDeck()
+
+    #print(test.drawCardNoReplace().showCard())
+    #print(test.drawCardWithReplace().showCard())
