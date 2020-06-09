@@ -38,90 +38,84 @@ class deck:
             blackClubs = playingCard('black','clubs',i)
             self.deckCards.append(blackClubs)
 
-    def singleCardTest(self):
-        testNum = 10000000
-        cntr = 0
-        for i  in range(testNum):
-            temp = self.drawCardWithReplace()
-            if(temp.showCard() == "1 of black spades"):
-                cntr += 1
+#testing methods
+def singleCardTest(self, testNum):
+    cntr = 0
+    for i  in range(testNum):
+        temp = self.drawCardWithReplace()
+        if(temp.showCard() == "1 of black spades"):
+            cntr += 1
 
-        probability = cntr/testNum
-        return probability
+    probability = cntr/testNum
+    return probability
 
-    def colorTest(self):
-        testNum = 10
-        cntr = 0
-        for i  in range(testNum):
-            temp = self.drawCardWithReplace()
-            if(temp.getColor() == "black"):
-                cntr += 1
+def colorTest(self, testNum):
+    cntr = 0
+    for i  in range(testNum):
+        temp = self.drawCardWithReplace()
+        if(temp.getColor() == "black"):
+            cntr += 1
 
-        probability = cntr/testNum
-        return probability
+    probability = cntr/testNum
+    return probability
 
-    def suitTest(self):
-        testNum = 10000000
-        cntr = 0
-        for i  in range(testNum):
-            temp = self.drawCardWithReplace()
-            if(temp.getSuit() == "spades"):
-                cntr += 1
+def suitTest(self, testNum):
+    cntr = 0
+    for i  in range(testNum):
+        temp = self.drawCardWithReplace()
+        if(temp.getSuit() == "spades"):
+            cntr += 1
 
-        probability = cntr/testNum
-        return probability
+    probability = cntr/testNum
+    return probability
 
-    def twoIndiv(self):
-        testNum = 10000000
-        cntr = 0
-        for i  in range(testNum):
-            temp1 = self.drawCardNoReplace()
-            temp2 = self.drawCardNoReplace()
-            if(temp1.showCard() == "1 of black spades") and (temp2.showCard() == "1 of red diamonds"):
-                cntr += 1
-            self.fillDeck()
+def twoIndiv(self, card, testNum):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = card.drawCardNoReplace()
+        temp2 = card.drawCardNoReplace()
+        if(temp1.showCard() == "1 of black spades") and (temp2.showCard() == "1 of red diamonds"):
+            cntr += 1
+        card.fillDeck()
 
-        probability = cntr/testNum
-        return probability
+    probability = cntr/testNum
+    return probability
 
-    def twoIndivColor(self):
-        testNum = 1000
-        cntr = 0
-        for i  in range(testNum):
-            temp1 = self.drawCardNoReplace()
-            temp2 = self.drawCardNoReplace()
-            if(temp1.showCard() == "1 of black spades") and (temp2.getColor() == "black"):
-                cntr += 1
-            self.fillDeck()
+def twoIndivColor(self, testNum):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        if(temp1.showCard() == "1 of black spades") and (temp2.getColor() == "black"):
+            cntr += 1
+        self.fillDeck()
 
-        probability = cntr/testNum
-        return probability
+    probability = cntr/testNum
+    return probability
 
-    def twoColors(self):
-        testNum = 1000000
-        cntr = 0
-        for i  in range(testNum):
-            temp1 = self.drawCardNoReplace()
-            temp2 = self.drawCardNoReplace()
-            if(temp1.getColor() == "black") and (temp2.getColor() == "red"):
-                cntr += 1
-            self.fillDeck()
+def twoColors(self, testNum):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        if(temp1.getColor() == "black") and (temp2.getColor() == "red"):
+            cntr += 1
+        self.fillDeck()
 
-        probability = cntr/testNum
-        return probability
+    probability = cntr/testNum
+    return probability
 
-    def twoNums(self):
-        testNum = 1000000
-        cntr = 0
-        for i  in range(testNum):
-            temp1 = self.drawCardNoReplace()
-            temp2 = self.drawCardNoReplace()
-            if(temp1.getValue() == temp2.getValue()):
-                cntr += 1
-            self.fillDeck()
+def twoNums(self, testNum):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        if(temp1.getValue() == temp2.getValue()):
+            cntr += 1
+        self.fillDeck()
 
-        probability = cntr/testNum
-        return probability
+    probability = cntr/testNum
+    return probability
 
 if __name__ == "__main__":
     test = deck()
@@ -136,9 +130,11 @@ if __name__ == "__main__":
     test.printDeck()
     print(test.singleCardTest())"""
 
+    print(singleCardTest(test,100000))
+    print(colorTest(test,100000))
     #print(test.colorTest())
     #print(test.suitTest())
-    print (test.twoIndivColor())
+    #3print (twoIndivColor(test,1000))
     #print(test.twoColors())
     #print(test.twoNums())
 
