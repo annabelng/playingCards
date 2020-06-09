@@ -56,40 +56,43 @@ def singleCardTest(self, testNum, attributes):
         if check == len(attributes):
             cntr +=1
         check = 0
-        
+
     probability = cntr/testNum
     return probability
 
-def twoIndiv(self, card, testNum):
+def doubleCardTest(self, testNum, card1, card2):
     cntr = 0
+
     for i  in range(testNum):
-        temp1 = card.drawCardNoReplace()
-        temp2 = card.drawCardNoReplace()
-        if(temp1.showCard() == "1 of black spades") and (temp2.showCard() == "1 of red diamonds"):
-            cntr += 1
-        card.fillDeck()
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+
+        if(temp1.showCard() == card1 and temp2.showCard() == card2):
+            cntr +=1
+
+        self.fillDeck()
 
     probability = cntr/testNum
     return probability
 
-def twoIndivColor(self, testNum):
+def doubleCardColor(self, testNum,card,color):
     cntr = 0
     for i  in range(testNum):
         temp1 = self.drawCardNoReplace()
         temp2 = self.drawCardNoReplace()
-        if(temp1.showCard() == "1 of black spades") and (temp2.getColor() == "black"):
+        if(temp1.showCard() == card) and (temp2.getColor() == color):
             cntr += 1
         self.fillDeck()
 
     probability = cntr/testNum
     return probability
 
-def twoColors(self, testNum):
+def twoColors(self, testNum,color1, color2):
     cntr = 0
     for i  in range(testNum):
         temp1 = self.drawCardNoReplace()
         temp2 = self.drawCardNoReplace()
-        if(temp1.getColor() == "black") and (temp2.getColor() == "red"):
+        if(temp1.getColor() == color1) and (temp2.getColor() == color2):
             cntr += 1
         self.fillDeck()
 
@@ -121,7 +124,11 @@ if __name__ == "__main__":
     test.printDeck()
     print(test.singleCardTest())"""
 
-    print(singleCardTest(test,100000,['diamonds']))
+    #print(singleCardTest(test,100,['diamonds']))
+    print(doubleCardTest(test,100000,'6 of black spades','5 of red diamonds'))
+    print(doubleCardColor(test,100000,'6 of black spades','red'))
+    print(twoColors(test,100000,'black','red'))
+
     #print(colorTest(test,100000))
     #print(test.colorTest())
     #print(test.suitTest())
