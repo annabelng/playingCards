@@ -44,20 +44,19 @@ def singleCardTest(self, testNum, attributes):
     check = 0
     for i  in range(testNum):
         temp = self.drawCardWithReplace()
-        for x in range(len(attributes)):
-            if(temp.getColor()==attributes[x]):
-                check+=1
-            elif(temp.getSuit()==attributes[x]):
-                check+=1
-            elif(temp.getValue()==attributes[x]):
-                check+=1
-            elif(attributes[x]=="of"):
-                check+=1
+        if(temp.getColor() in attributes):
+            check+=1
+        if(temp.getSuit() in attributes):
+            check+=1
+        if(temp.getValue() in attributes):
+            check+=1
+        if('of' in attributes):
+            check+=1
 
         if check == len(attributes):
             cntr +=1
         check = 0
-
+        
     probability = cntr/testNum
     return probability
 
@@ -122,7 +121,7 @@ if __name__ == "__main__":
     test.printDeck()
     print(test.singleCardTest())"""
 
-    print(singleCardTest(test,100000,['red']))
+    print(singleCardTest(test,100000,['diamonds']))
     #print(colorTest(test,100000))
     #print(test.colorTest())
     #print(test.suitTest())
