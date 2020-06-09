@@ -39,32 +39,24 @@ class deck:
             self.deckCards.append(blackClubs)
 
 #testing methods
-def singleCardTest(self, testNum):
+def singleCardTest(self, testNum, attributes):
     cntr = 0
+    check = 0
     for i  in range(testNum):
         temp = self.drawCardWithReplace()
-        if(temp.showCard() == "1 of black spades"):
-            cntr += 1
+        for x in range(len(attributes)):
+            if(temp.getColor()==attributes[x]):
+                check+=1
+            elif(temp.getSuit()==attributes[x]):
+                check+=1
+            elif(temp.getValue()==attributes[x]):
+                check+=1
+            elif(attributes[x]=="of"):
+                check+=1
 
-    probability = cntr/testNum
-    return probability
-
-def colorTest(self, testNum):
-    cntr = 0
-    for i  in range(testNum):
-        temp = self.drawCardWithReplace()
-        if(temp.getColor() == "black"):
-            cntr += 1
-
-    probability = cntr/testNum
-    return probability
-
-def suitTest(self, testNum):
-    cntr = 0
-    for i  in range(testNum):
-        temp = self.drawCardWithReplace()
-        if(temp.getSuit() == "spades"):
-            cntr += 1
+        if check == len(attributes):
+            cntr +=1
+        check = 0
 
     probability = cntr/testNum
     return probability
@@ -130,8 +122,8 @@ if __name__ == "__main__":
     test.printDeck()
     print(test.singleCardTest())"""
 
-    print(singleCardTest(test,100000))
-    print(colorTest(test,100000))
+    print(singleCardTest(test,100000,['red']))
+    #print(colorTest(test,100000))
     #print(test.colorTest())
     #print(test.suitTest())
     #3print (twoIndivColor(test,1000))
