@@ -38,6 +38,22 @@ class deck:
             blackClubs = playingCard('black','clubs',i)
             self.deckCards.append(blackClubs)
 
+    def filteredDeck(self,suits,vals):
+        self.clearDeck()
+        for i in range (vals[0],vals[1]):
+            if('hearts' in suits):
+                redHearts = playingCard('red','hearts',i)
+                self.deckCards.append(redHearts)
+            if('diamonds'in suits):
+                redDiamond = playingCard('red','diamonds',i)
+                self.deckCards.append(redDiamond)
+            if('spades'in suits):
+                blackSpades = playingCard('black','spades',i)
+                self.deckCards.append(blackSpades)
+            if('clubs' in suits):
+                blackClubs = playingCard('black','clubs',i)
+                self.deckCards.append(blackClubs)
+
 #testing methods
 def singleCardTest(self, testNum, attributes):
     cntr = 0
@@ -111,30 +127,107 @@ def twoNums(self, testNum):
     probability = cntr/testNum
     return probability
 
+def threeColors(self, testNum, color1, color2, color3):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        temp3 = self.drawCardNoReplace()
+        if(temp1.getColor() == color1) and (temp2.getColor() == color2) and (temp3.getColor() == color3):
+            cntr += 1
+        self.fillDeck()
+
+    probability = cntr/testNum
+    return probability
+
+def minColor(self,testNum, color):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        temp3 = self.drawCardNoReplace()
+        if(temp1.getColor() == color) or (temp2.getColor() == color) or (temp3.getColor() == color):
+            cntr += 1
+        self.fillDeck()
+
+    probability = cntr/testNum
+    return probability
+
+def atLeastTwoColor(self, testNum,color):
+    cntr = 0
+    check = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        temp3 = self.drawCardNoReplace()
+        if(temp1.getColor() == color):
+            check += 1
+        if(temp2.getColor() == color):
+            check+=1
+        if(temp3.getColor() == color):
+            check += 1
+        if(check>=2):
+            cntr +=1
+        self.fillDeck()
+        check = 0
+
+    probability = cntr/testNum
+    return probability
+
+def pair(self,testNum,value):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        temp3 = self.drawCardNoReplace()
+        if(temp1.getValue() == temp2.getValue()):
+            cntr += 1
+        elif(temp1.getValue() == temp3.getValue()):
+            cntr += 1
+        elif(temp2.getValue() == temp3.getValue()):
+            cntr += 1
+        self.fillDeck()
+
+    probability = cntr/testNum
+    return probability
+
+def threeVal(self, testNum, value):
+    cntr = 0
+    for i  in range(testNum):
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        temp3 = self.drawCardNoReplace()
+        if(temp1.getValue() == temp2.getValue() and temp1.getValue() == temp3.getValue()):
+            cntr +=1
+        self.fillDeck()
+
+    probability = cntr/testNum
+    return probability
+
+def singleGivenValue(self, testNum, givenSuits, givenValues, target):
+    cntr = 0
+
+    self.filteredDeck(givenSuits,givenValues)
+    for i  in range(testNum):
+        #self.filter(given)
+
+        temp = self.drawCardWithReplace()
+        if(temp.getValue() == target):
+            cntr += 1
+
+    probability = cntr/testNum
+    return probability
+
+
 if __name__ == "__main__":
     test = deck()
-    #test.shuffle()
-    #test.printDeck()
-    """print("first deck")
-    test.shuffle()
-    print("shuffle")
-    test.printDeck()
-    print("new deck")
-    test.fillDeck()e
-    test.printDeck()
-    print(test.singleCardTest())"""
-
-    #print(singleCardTest(test,100,['diamonds']))
-    print(doubleCardTest(test,100000,'6 of black spades','5 of red diamonds'))
+    '''print(doubleCardTest(test,100000,'6 of black spades','5 of red diamonds'))
     print(doubleCardColor(test,100000,'6 of black spades','red'))
-    print(twoColors(test,100000,'black','red'))
-
-    #print(colorTest(test,100000))
-    #print(test.colorTest())
-    #print(test.suitTest())
-    #3print (twoIndivColor(test,1000))
-    #print(test.twoColors())
-    #print(test.twoNums())
-
-    #print(test.drawCardNoReplace().showCard())
-    #print(test.drawCardWithReplace().showCard())
+    print(twoColors(test,100000,'black','red'))'''
+    #print(minColor(test, 1000000, 'red'))
+    #print(atLeastTwoColor(test,10000000,'red'))
+    #print(pair(test,10000000,8))
+    #print(threeVal(test,1000000,2))
+    #test.filteredDeck(['diamonds','hearts'],[1,14])
+    #test.printDeck()
+    print(singleGivenValue(test,1000000,['diamonds','hearts'],[1,14],13))
