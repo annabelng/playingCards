@@ -204,13 +204,10 @@ def threeVal(self, testNum, value):
     probability = cntr/testNum
     return probability
 
-def singleGivenValue(self, testNum, givenSuits, givenValues, target):
+def singleCardGiven(self, testNum, givenSuits, givenValues, target):
     cntr = 0
-
     self.filteredDeck(givenSuits,givenValues)
     for i  in range(testNum):
-        #self.filter(given)
-
         temp = self.drawCardWithReplace()
         if(temp.getValue() == target):
             cntr += 1
@@ -218,6 +215,35 @@ def singleGivenValue(self, testNum, givenSuits, givenValues, target):
     probability = cntr/testNum
     return probability
 
+def doubleCardGiven(self, testNum, givenSuit, target):
+    cntr = 0
+    i=0
+    while i < testNum:
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        if(temp1.getSuit() == givenSuit or temp2.getSuit()==givenSuit):
+            i += 1
+            if(temp1.getSuit() == givenSuit and temp2.getSuit()==givenSuit):
+                cntr +=1
+        self.fillDeck()
+
+    probability = cntr/testNum
+    return probability
+
+def consecutiveGivenVal(self,testNum,givenVal):
+    cntr = 0
+    i=0
+    while i < testNum:
+        temp1 = self.drawCardNoReplace()
+        temp2 = self.drawCardNoReplace()
+        if(temp1.getValue() == givenVal or temp2.getSuit()==givenVal):
+            i += 1
+            if(temp2.getValue()-temp1.getValue()==1):
+                cntr +=1
+        self.fillDeck()
+
+    probability = cntr/testNum
+    return probability
 
 if __name__ == "__main__":
     test = deck()
@@ -230,4 +256,6 @@ if __name__ == "__main__":
     #print(threeVal(test,1000000,2))
     #test.filteredDeck(['diamonds','hearts'],[1,14])
     #test.printDeck()
-    print(singleGivenValue(test,1000000,['diamonds','hearts'],[1,14],13))
+    #print(singleCardGiven(test,1000000,['diamonds','hearts'],[1,14],13))
+    #print(doubleCardGiven(test,1000000,'spades',13))
+    print(consecutiveGivenVal(test,1000000,4))
